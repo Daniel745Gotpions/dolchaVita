@@ -1,5 +1,5 @@
 <?php 
-    error_reporting(E_ALL);ini_set('display_errors',1);;
+    //error_reporting(E_ALL);ini_set('display_errors',1);;
     include __DIR__.'/../connection.php';
     include __DIR__.'/../taskClass.php';
 
@@ -14,10 +14,7 @@
     }
     
     $taskId = (int) $_POST['taskId'];
-    $task = new Task($taskId);
-    $task->setStatusId((int)$_POST['statusId']);
-    $task->setDateAdd($_POST['date']);
-    $task->setName($_POST['desc']);
+    $task = new Task($taskId,$_POST['date'],$_POST['desc'],(int)$_POST['statusId']);
     $isSuccess = $task->edit();
     $json['status'] = $isSuccess;
     $other = $task->getResult();

@@ -1,5 +1,5 @@
 <?php 
-error_reporting(E_ALL);ini_set('display_errors',1);;
+//error_reporting(E_ALL);ini_set('display_errors',1);;
     include __DIR__.'/../connection.php';
     include __DIR__.'/../taskClass.php';
     include __DIR__.'/../statusClass.php';
@@ -8,7 +8,7 @@ error_reporting(E_ALL);ini_set('display_errors',1);;
     $statuses = $status->getList($taskId);
     $task = new Task($taskId);
     $taskDetails = $task->getResult(true);
-    $date = date('d-m-Y',strtotime($taskDetails['data'][0]->dateAdd));
+    $date = date('Y-m-d',strtotime($taskDetails['data'][0]->dateAdd));
 ?>
 <form id="FormEdit">
     <input type="hidden" name="taskId" value="<?php echo $taskId?>">

@@ -8,7 +8,7 @@ class Task{
     
     function __construct($id =null,$dateAdd =null,$name=null, $statusId = null) {
         $this->id = (int)$id;
-        $this->dateAdd = $dateAdd;
+        $this->dateAdd = date('Y-m-d',strtotime($dateAdd));
         $this->name = $name;
         $this->statusId =(int) $statusId;
     }
@@ -16,12 +16,11 @@ class Task{
     public function insert(){
 
         $stmt = conn::R()->prepare("INSERT INTO task (dateAdd,name,statusId) VALUES(?,?,?)");
-        $stmt->execute(array($this->dateAdd,$this->name,$this->statusId));
+        $stmt->execute(array(date('Y-m-d',strtotime($this->dateAdd)),$this->name,$this->statusId));
         return conn::R()->lastInsertId();
     }
 
     public function edit(){
-        
         $stmt = conn::R()->prepare("UPDATE task SET dateAdd=?,name=?, statusId=?
         WHERE id = ".$this->id);
         $stmt->execute(array($this->dateAdd, $this->name,$this->statusId));
@@ -85,7 +84,7 @@ class Task{
     }
 
     public function setDateAdd($dateAdd) {
-        $this->dateAdd = $dateAdd;
+        $this->dateAdd = date('Y-m-d',strtotime($dateAdd));
     }
 
     public function getId() {
